@@ -2,13 +2,9 @@ package com.despegar.test.action;
 
 import com.despegar.test.helpers.Report;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.Select;
 
 public class DriverManager {
 
@@ -20,12 +16,13 @@ public class DriverManager {
     //---------- DRIVER INITIATION ------------------------------------------------------------------------------------>
     //----------------------------------------------------------------------------------------------------------------->
 
-    public static void initDriverManager(){
+    public static void init(){
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
+        options.addArguments("--incognito");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
-        Wait.initWait(driver);
+        Wait.init(driver);
     }
 
     //----------------------------------------------------------------------------------------------------------------->
@@ -59,6 +56,18 @@ public class DriverManager {
         element.click();
     }
 
+    public static void click(String xpath) {
+        Wait.forElementDisplayed(xpath);
+        driver.findElement(By.xpath(xpath)).click();
+    }
+
+    public static void clickJS(String xpath) {
+        Wait.forElementClickable(xpath);
+        String script = String.format("document.evaluate(\"%s\", document, null, 9, null).singleNodeValue.click()", xpath);
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript(script);
+    }
+
     public static String getText(WebElement element) {
         Wait.forElementVisible(element);
         return element.getText();
@@ -66,24 +75,22 @@ public class DriverManager {
 
     public static void sendText(WebElement element, String text) {
         Wait.forElementVisible(element);
+        element.click();
         element.sendKeys(text);
-    }
-
-    public static void clearText(WebElement element) {
-        Wait.forElementVisible(element);
-        element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
-        element.sendKeys(Keys.DELETE);
-    }
-
-    public static void selectOption(WebElement element, String option) {
-        Wait.forElementVisible(element);
-        Select select = new Select(element);
-        select.selectByVisibleText(option);
     }
 
     public static boolean isVisible(WebElement element) {
         try {
             Wait.forElementDisplayed(element);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public static boolean isVisible(String xpath) {
+        try {
+            Wait.forElementDisplayed(xpath);
             return true;
         } catch (NoSuchElementException e) {
             return false;

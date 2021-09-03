@@ -20,6 +20,8 @@ public class Dictionary {
     public static class DateFormat {
         private DateFormat(){}
         public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH-mm-ss";
+        public static final String YYYY_MM = "yyyy-MM";
+        public static final String D = "d";
     }
 
 }

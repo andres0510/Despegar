@@ -18,7 +18,7 @@ public class Report {
     //---------- OBJECT INITIATION ------------------------------------------------------------------------------------>
     //----------------------------------------------------------------------------------------------------------------->
 
-    public static void initReport(){
+    public static void init(){
         try {
             String logName = String.format("log/log%s.txt", Utilities.getCurrentDate(Dictionary.DateFormat.YYYY_MM_DD_HH_MM_SS));
             log = Logger.getLogger(logName);
