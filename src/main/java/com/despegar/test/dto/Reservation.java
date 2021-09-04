@@ -11,6 +11,7 @@ public class Reservation {
     private static String destinationCity;
     private static Date departureDate;
     private static Date returnDate;
+    private static String price;
 
     private Reservation(){}
 
@@ -40,6 +41,18 @@ public class Reservation {
 
     public static Date getReturnDate() {
         return returnDate;
+    }
+
+    public static String getPrice() {
+        return price;
+    }
+
+    //----------------------------------------------------------------------------------------------------------------->
+    //---------- SETTER ----------------------------------------------------------------------------------------------->
+    //----------------------------------------------------------------------------------------------------------------->
+
+    public static void setPrice(String price) {
+        Reservation.price = price;
     }
 
 }

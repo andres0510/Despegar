@@ -22,6 +22,7 @@ public class ReservationSteps {
     @When("^a flight reservation is made$")
     public void aFlightReservationIsMade(){
         ReservationController.searchFlights();
+        ReservationController.selectFlight();
     }
 
     @Then("^the application shows correct info for reservation$")

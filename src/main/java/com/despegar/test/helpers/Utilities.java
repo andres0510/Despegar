@@ -18,4 +18,12 @@ public class Utilities {
         return sdf.format(date);
     }
 
+    public static void waitFor(int milliseconds){
+        try {
+            Thread.sleep(milliseconds);
+        } catch (Exception e) {
+            Report.reportFail(String.format("[ERROR] Waiting failure: %s", e.getMessage()));
+        }
+    }
+
 }

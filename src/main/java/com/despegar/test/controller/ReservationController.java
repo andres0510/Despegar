@@ -1,8 +1,10 @@
 package com.despegar.test.controller;
 
 import com.despegar.test.dto.Reservation;
+import com.despegar.test.enums.LoadingType;
 import com.despegar.test.helpers.Dictionary;
 import com.despegar.test.helpers.Utilities;
+import com.despegar.test.page.ResultsPage;
 import com.despegar.test.page.SearchPage;
 
 public class ReservationController {
@@ -26,6 +28,14 @@ public class ReservationController {
         searchPage.clickBtnSearch();
     }
 
-
+    public static void selectFlight(){
+        GeneralController.waitWhileLoading(LoadingType.PROGRESS_BAR);
+        ResultsPage resultsPage = new ResultsPage();
+        Reservation.setPrice(resultsPage.getFlightPrice());
+        resultsPage.clickBoxFirstFlight();
+        GeneralController.waitWhileLoading(LoadingType.LOOP);
+        resultsPage.clickSelectFirstFlight();
+        GeneralController.waitWhileLoading(LoadingType.LOOP);
+    }
 
 }
