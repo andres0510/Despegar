@@ -44,6 +44,14 @@ public class SearchPage {
         DriverManager.sendText(inputDestination, city);
     }
 
+    public void deleteDestinationCity() {
+        DriverManager.clearText(inputDestination);
+    }
+
+    public boolean optionCityIsVisible(){
+        return DriverManager.isVisible(optCity);
+    }
+
     public void clickCityOption() {
         DriverManager.click(optCity);
     }

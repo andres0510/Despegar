@@ -79,6 +79,12 @@ public class DriverManager {
         element.sendKeys(text);
     }
 
+    public static void clearText(WebElement element) {
+        Wait.forElementVisible(element);
+        element.sendKeys(Keys.chord(Keys.CONTROL, "a"));
+        element.sendKeys(Keys.DELETE);
+    }
+
     public static boolean isVisible(WebElement element) {
         try {
             Wait.forElementDisplayed(element);

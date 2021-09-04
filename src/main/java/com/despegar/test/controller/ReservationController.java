@@ -3,6 +3,7 @@ package com.despegar.test.controller;
 import com.despegar.test.dto.Reservation;
 import com.despegar.test.enums.LoadingType;
 import com.despegar.test.helpers.Dictionary;
+import com.despegar.test.helpers.Report;
 import com.despegar.test.helpers.Utilities;
 import com.despegar.test.page.PaymentPage;
 import com.despegar.test.page.ResultsPage;
@@ -16,7 +17,7 @@ public class ReservationController {
         SearchPage searchPage = new SearchPage();
         searchPage.writeOriginCity(Reservation.getOriginCity());
         searchPage.clickCityOption();
-        searchPage.writeDestinationCity(Reservation.getDestinationCity());
+        writeDestinationCity();
         searchPage.clickCityOption();
         searchPage.clickBtnDepartureDate();
         String yearMonth = Utilities.getDateAsFormat(Reservation.getDepartureDate(), Dictionary.DateFormat.YYYY_MM);
@@ -53,6 +54,29 @@ public class ReservationController {
         AssertController.compare("Departure date", date, paymentPage.getDepartureDate());
         date = Utilities.getDateAsFormat(Reservation.getReturnDate(), Dictionary.DateFormat.DD_MMM_YYYY);
         AssertController.compare("Return date", date, paymentPage.getReturnDate());
+    }
+
+    //----------------------------------------------------------------------------------------------------------------->
+    //---------- HELP FUNCTIONS --------------------------------------------------------------------------------------->
+    //----------------------------------------------------------------------------------------------------------------->
+
+    private static void writeDestinationCity(){
+        SearchPage searchPage = new SearchPage();
+        final int ATTEMPTS = 5;
+        boolean shownOption = false;
+        for (int i=1; i<=ATTEMPTS; i++) {
+            searchPage.writeDestinationCity(Reservation.getDestinationCity());
+            if (searchPage.optionCityIsVisible()) {
+                shownOption = true;
+                break;
+            } else {
+                searchPage.deleteDestinationCity();
+                Utilities.waitFor(500);
+            }
+        }
+        if (!shownOption) {
+            Report.reportFail("Destination city was not found");
+        }
     }
 
 }
