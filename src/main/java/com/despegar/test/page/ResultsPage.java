@@ -24,6 +24,15 @@ public class ResultsPage {
     @FindBy(xpath = "(//em[text()='Seleccionar']/parent::*/parent::a)[1]")
     private WebElement btnSelectFlight;
 
+    @FindBy(xpath = "//*[@id='upselling-popup-position']//h3")
+    private WebElement popupBuyBaggageSpace;
+
+    @FindBy(xpath = "//*[contains(@class,'amount price-amount') and text()='0']")
+    private WebElement optionStandardBaggage;
+
+    @FindBy(xpath = "//*[@id='upselling-popup-position']//button")
+    private WebElement btnContinueBaggage;
+
     //----------------------------------------------------------------------------------------------------------------->
     //---------- ACTIONS ---------------------------------------------------------------------------------------------->
     //----------------------------------------------------------------------------------------------------------------->
@@ -36,8 +45,20 @@ public class ResultsPage {
         DriverManager.click(boxFirstFlight);
     }
 
-    public void clickSelectFirstFlight(){
+    public void clickBtnSelectFirstFlight(){
         DriverManager.click(btnSelectFlight);
+    }
+
+    public boolean baggagePopupIsVisible(){
+        return DriverManager.isVisible(popupBuyBaggageSpace);
+    }
+
+    public void clickStandardBaggage(){
+        DriverManager.click(optionStandardBaggage);
+    }
+
+    public void clickBtnContinueBaggage(){
+        DriverManager.click(btnContinueBaggage);
     }
 
 }

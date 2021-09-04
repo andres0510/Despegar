@@ -4,6 +4,7 @@ import com.despegar.test.dto.Reservation;
 import com.despegar.test.enums.LoadingType;
 import com.despegar.test.helpers.Dictionary;
 import com.despegar.test.helpers.Utilities;
+import com.despegar.test.page.PaymentPage;
 import com.despegar.test.page.ResultsPage;
 import com.despegar.test.page.SearchPage;
 
@@ -34,8 +35,24 @@ public class ReservationController {
         Reservation.setPrice(resultsPage.getFlightPrice());
         resultsPage.clickBoxFirstFlight();
         GeneralController.waitWhileLoading(LoadingType.LOOP);
-        resultsPage.clickSelectFirstFlight();
+        resultsPage.clickBtnSelectFirstFlight();
         GeneralController.waitWhileLoading(LoadingType.LOOP);
+        if (resultsPage.baggagePopupIsVisible()) {
+            resultsPage.clickStandardBaggage();
+            resultsPage.clickBtnContinueBaggage();
+            GeneralController.waitWhileLoading(LoadingType.LOOP);
+        }
+    }
+
+    public static void compareFlightInfo(){
+        PaymentPage paymentPage = new PaymentPage();
+        AssertController.compare("Price", Reservation.getPrice(), paymentPage.getFlightPrice());
+        String cities = String.format("%s - %s", Reservation.getOriginCity(), Reservation.getDestinationCity());
+        AssertController.compare("Cities", cities, paymentPage.getCities());
+        String date = Utilities.getDateAsFormat(Reservation.getDepartureDate(), Dictionary.DateFormat.DD_MMM_YYYY);
+        AssertController.compare("Departure date", date, paymentPage.getDepartureDate());
+        date = Utilities.getDateAsFormat(Reservation.getReturnDate(), Dictionary.DateFormat.DD_MMM_YYYY);
+        AssertController.compare("Return date", date, paymentPage.getReturnDate());
     }
 
 }

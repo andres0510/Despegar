@@ -2,6 +2,7 @@ package com.despegar.test.helpers;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class Utilities {
 
@@ -14,7 +15,8 @@ public class Utilities {
     }
 
     public static String getDateAsFormat(Date date, String format) {
-        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        Locale locale = new Locale("es", "ES");
+        SimpleDateFormat sdf = new SimpleDateFormat(format, locale);
         return sdf.format(date);
     }
 

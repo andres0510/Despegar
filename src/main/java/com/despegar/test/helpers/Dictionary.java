@@ -14,7 +14,7 @@ public class Dictionary {
     public static class Messages {
         private Messages(){}
         public static final String SUCCESS = "[SUCCESS] - %s";
-        public static final String COMPARE = "[COMPARE] - Expected: %s - Found: %s";
+        public static final String COMPARE = "[COMPARE] %s - Expected: %s - Found: %s";
     }
 
     public static class DateFormat {
@@ -22,6 +22,7 @@ public class Dictionary {
         public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH-mm-ss";
         public static final String YYYY_MM = "yyyy-MM";
         public static final String D = "d";
+        public static final String DD_MMM_YYYY = "dd MMM yyyy";
     }
 
 }

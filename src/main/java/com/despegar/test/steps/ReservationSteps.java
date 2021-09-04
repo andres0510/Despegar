@@ -27,7 +27,7 @@ public class ReservationSteps {
 
     @Then("^the application shows correct info for reservation$")
     public void theApplicationShowsCorrectInfoForReservation(){
-
+        ReservationController.compareFlightInfo();
     }
 
 }
