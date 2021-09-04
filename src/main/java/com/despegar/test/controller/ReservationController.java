@@ -33,9 +33,9 @@ public class ReservationController {
     public static void selectFlight(){
         GeneralController.waitWhileLoading(LoadingType.PROGRESS_BAR);
         ResultsPage resultsPage = new ResultsPage();
-        Reservation.setPrice(resultsPage.getFlightPrice());
         resultsPage.clickBoxFirstFlight();
         GeneralController.waitWhileLoading(LoadingType.LOOP);
+        Reservation.setPrice(resultsPage.getFlightPrice());
         resultsPage.clickBtnSelectFirstFlight();
         GeneralController.waitWhileLoading(LoadingType.LOOP);
         if (resultsPage.baggagePopupIsVisible()) {

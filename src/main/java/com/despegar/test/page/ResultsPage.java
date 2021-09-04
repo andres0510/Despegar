@@ -18,7 +18,7 @@ public class ResultsPage {
     @FindBy(xpath = "(//airlines-matrix-airline/ul)[1]//*[@class='airline-description']")
     private WebElement boxFirstFlight;
 
-    @FindBy(xpath = "(//airlines-matrix-airline/ul)[1]//*[contains(@class,'amount price-amount')]")
+    @FindBy(xpath = "(//em[text()='Precio final ']/parent::*//*[contains(@class,'amount price-amount')])[1]")
     private WebElement labelFirstFlightPrice;
 
     @FindBy(xpath = "(//em[text()='Seleccionar']/parent::*/parent::a)[1]")
